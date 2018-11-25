@@ -17,6 +17,6 @@ build_script:
   - ps: dotnet build -c Release -o out
 
 test_script: 
-  - ps: cd ./test/ThinkNoteBackEnd.MainTest
+  - ps: cd ../../test/ThinkNoteBackEnd.MainTest
   - ps: dotnet test
 version: 0.0.1.{build}
