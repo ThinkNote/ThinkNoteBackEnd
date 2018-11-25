@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ThinkNoteBackEnd.Controllers
 {
@@ -10,6 +11,10 @@ namespace ThinkNoteBackEnd.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        public ValuesController()
+        {
+            
+        }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -28,6 +33,7 @@ namespace ThinkNoteBackEnd.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            
         }
 
         // PUT api/values/5
