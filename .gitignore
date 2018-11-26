@@ -70,7 +70,6 @@ artifacts/
 *.log
 *.vspscc
 *.vssscc
-.builds
 *.pidb
 *.svclog
 *.scc
@@ -276,3 +275,6 @@ __pycache__/
 
 .vs
 .vscode
+
+src/ThinkNoteBackEnd.User/bin
+src/ThinkNoteBackEnd.User/obj
