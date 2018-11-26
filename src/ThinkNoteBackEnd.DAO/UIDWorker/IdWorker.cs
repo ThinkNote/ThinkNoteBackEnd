@@ -9,7 +9,7 @@
 
 using System;
 
-namespace ThinkNoteBackEnd.User
+namespace ThinkNoteBackEnd.DAO.Helper
 {
     public class IdWorker
     {

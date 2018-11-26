@@ -1,9 +1,0 @@
-G:\ThinkNoteBackEnd\src\ThinkNoteBackEnd.User\bin\Debug\netcoreapp2.1\ThinkNoteBackEnd.User.deps.json
-G:\ThinkNoteBackEnd\src\ThinkNoteBackEnd.User\bin\Debug\netcoreapp2.1\ThinkNoteBackEnd.User.dll
-G:\ThinkNoteBackEnd\src\ThinkNoteBackEnd.User\bin\Debug\netcoreapp2.1\ThinkNoteBackEnd.User.pdb
-G:\ThinkNoteBackEnd\src\ThinkNoteBackEnd.User\obj\Debug\netcoreapp2.1\ThinkNoteBackEnd.User.csproj.CoreCompileInputs.cache
-G:\ThinkNoteBackEnd\src\ThinkNoteBackEnd.User\obj\Debug\netcoreapp2.1\ThinkNoteBackEnd.User.AssemblyInfoInputs.cache
-G:\ThinkNoteBackEnd\src\ThinkNoteBackEnd.User\obj\Debug\netcoreapp2.1\ThinkNoteBackEnd.User.AssemblyInfo.cs
-G:\ThinkNoteBackEnd\src\ThinkNoteBackEnd.User\obj\Debug\netcoreapp2.1\ThinkNoteBackEnd.User.dll
-G:\ThinkNoteBackEnd\src\ThinkNoteBackEnd.User\obj\Debug\netcoreapp2.1\ThinkNoteBackEnd.User.pdb
-G:\ThinkNoteBackEnd\src\ThinkNoteBackEnd.User\obj\Debug\netcoreapp2.1\ThinkNoteBackEnd.User.csprojAssemblyReference.cache

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ThinkNoteBackEnd.User
+namespace ThinkNoteBackEnd.DAO.Helper
 {
     public static class System
     {

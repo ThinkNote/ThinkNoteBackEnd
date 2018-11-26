@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ThinkNoteBackEnd.User\ThinkNoteBackEnd.User.csproj" />
+    <ProjectReference Include="..\ThinkNoteBackEnd.DAO\ThinkNoteBackEnd.DAO.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
