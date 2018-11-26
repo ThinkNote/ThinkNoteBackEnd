@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27428.2011
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThinkNoteBackEnd", "ThinkNoteBackEnd.csproj", "{8DBA2521-8AF5-4FFA-92DA-E905D6FF020F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThinkNoteBackEnd.MainTest", "..\..\test\ThinkNoteBackEnd.MainTest\ThinkNoteBackEnd.MainTest.csproj", "{515962E1-EEAB-49BD-9674-F0E68E7C8B4C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThinkNoteBackEnd.User", "..\ThinkNoteBackEnd.User\ThinkNoteBackEnd.User.csproj", "{2477DDB5-7C1A-4084-B0AD-94AFD04CE8B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{515962E1-EEAB-49BD-9674-F0E68E7C8B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{515962E1-EEAB-49BD-9674-F0E68E7C8B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{515962E1-EEAB-49BD-9674-F0E68E7C8B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2477DDB5-7C1A-4084-B0AD-94AFD04CE8B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2477DDB5-7C1A-4084-B0AD-94AFD04CE8B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2477DDB5-7C1A-4084-B0AD-94AFD04CE8B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2477DDB5-7C1A-4084-B0AD-94AFD04CE8B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

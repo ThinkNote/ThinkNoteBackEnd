@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using ThinkNoteBackEnd.User;
 
 namespace ThinkNoteBackEnd
 {
@@ -19,6 +12,8 @@ namespace ThinkNoteBackEnd
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            //var id = configuration["SnowflakeConfiguration:WorkerId"];
+            //var data_id = configuration["SnowflakeConfiguration:DatacenterId"];
         }
 
         public IConfiguration Configuration { get; }
@@ -27,6 +22,9 @@ namespace ThinkNoteBackEnd
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            var workerId = Configuration["SnowflakeConfiguration:WorkerId"];
+            var datacenterId = Configuration["SnowflakeConfiguration:DatacenterId"];
+            services.AddSingleton(new IdWorker(int.Parse(workerId), int.Parse(datacenterId)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

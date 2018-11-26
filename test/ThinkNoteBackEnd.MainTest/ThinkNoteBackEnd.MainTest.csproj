@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\ThinkNoteBackEnd.User\ThinkNoteBackEnd.User.csproj" />
     <ProjectReference Include="..\..\src\ThinkNoteBackEnd\ThinkNoteBackEnd.csproj" />
   </ItemGroup>
 

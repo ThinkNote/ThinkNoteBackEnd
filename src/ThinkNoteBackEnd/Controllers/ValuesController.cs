@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using ThinkNoteBackEnd.User;
 
 namespace ThinkNoteBackEnd.Controllers
 {
@@ -11,9 +13,10 @@ namespace ThinkNoteBackEnd.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        public ValuesController()
+        private readonly IdWorker _IdWorker;
+        public ValuesController(IdWorker InjectedWorker)
         {
-            
+            _IdWorker = InjectedWorker;
         }
         // GET api/values
         [HttpGet]
@@ -21,14 +24,11 @@ namespace ThinkNoteBackEnd.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
+        [HttpGet("uid")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            return _IdWorker.NextId().ToString();
         }
-
         // POST api/values
         [HttpPost]
         public void Post([FromBody] string value)
