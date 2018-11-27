@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ThinkNoteBackEnd.User;
+using ThinkNoteBackEnd.DAO.User;
 using Xunit;
 
 namespace ThinkNoteBackEnd.MainTest
