@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ThinkNoteBackEnd.DAO.User;
+using src.ThinkNoteBackEnd.DAO.User;
+using src.ThinkNoteBackEnd.DAO.UIDWorker;
 using Xunit;
 
 namespace ThinkNoteBackEnd.MainTest
