@@ -8,7 +8,7 @@ namespace ThinkNoteBackEnd.DAO.User
         public long Uid { get; set; }
         public string Username { get; set; }
         public string Phone { get; set; }
-        public int SchoolCode { get; set; }
+        public int? SchoolCode { get; set; }
         public string Signature { get; set; }
         public byte? Sex { get; set; }
         public DateTime? Birthday { get; set; }

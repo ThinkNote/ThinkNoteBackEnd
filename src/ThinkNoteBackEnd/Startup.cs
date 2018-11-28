@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Linq;
+using ThinkNoteBackEnd.DAO.Actions.User;
 using ThinkNoteBackEnd.DAO.Helper;
 using ThinkNoteBackEnd.DAO.User;
 
@@ -14,7 +17,6 @@ namespace ThinkNoteBackEnd
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
         }
 
         public IConfiguration Configuration { get; }
@@ -25,10 +27,10 @@ namespace ThinkNoteBackEnd
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             var workerId = Configuration["SnowflakeConfiguration:WorkerId"];
             var datacenterId = Configuration["SnowflakeConfiguration:DatacenterId"];
-            services.AddSingleton(new IdWorker(int.Parse(workerId), int.Parse(datacenterId)));
             services.AddDbContext<UserContext>(opt => opt.UseMySQL(Configuration.GetConnectionString("MySQLConnectionString")));
+            services.AddSingleton(new IdWorker(int.Parse(workerId), int.Parse(datacenterId)));
+            services.AddSingleton<IAccountsAction, AccountsAction>(factory => new AccountsAction(factory.CreateScope().ServiceProvider));
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {

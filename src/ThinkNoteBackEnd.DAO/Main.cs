@@ -1,11 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using ThinkNoteBackEnd.DAO.Helper;
-using ThinkNoteBackEnd.DAO.User;
-using System.Linq;
-using System.Data.Common;
 
 namespace ThinkNoteBackEnd.DAO
 {

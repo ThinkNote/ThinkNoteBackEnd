@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using ThinkNoteBackEnd.DAO.Helper;
-using ThinkNoteBackEnd.DAO.User;
+using ThinkNoteBackEnd.DAO.Actions.User;
 
 namespace ThinkNoteBackEnd.Controllers
 {
@@ -15,35 +8,21 @@ namespace ThinkNoteBackEnd.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IdWorker _IdWorker;
-        private readonly UserContext _UserContext;
-        public UserController(IdWorker InjectedWorker,UserContext userContext)
+        private readonly IAccountsAction _accountsAction;
+        public UserController(IAccountsAction accountsAction)
         {
-            _IdWorker = InjectedWorker;
-            _UserContext = userContext;
+            _accountsAction = accountsAction;  
         }
         [AllowAnonymous]
         [HttpPost("Login")]
         public ActionResult ValidateLogin([FromForm] string identifier, [FromForm] string password)
         {
-            Console.WriteLine(identifier);
-            var loginvalidator = _UserContext.UserLoginInfo.FirstOrDefault(user => user.Username == identifier || user.Email == identifier);
-            if(loginvalidator!=null)
-            {
-                if (password == loginvalidator.Password)
-                {
-                    return Ok(new { Message = "登陆成功", ErrorCode = 0 });
-                }
-                return BadRequest(new { Message = "登陆失败，密码错误", ErrorCode = -1 });
-                
-            }
-            return BadRequest(new { Message = "登陆失败，找不到用户", ErrorCode = -2 });
+            return Ok(_accountsAction.ValidateLoginAccount(identifier,password));
         }
-        [HttpGet("CheckUsername")]
-        public ActionResult CheckUniqueUsername([FromQuery] string check)
+        [HttpGet("CheckEmail")]
+        public ActionResult CheckUniqueEmail([FromQuery] string email)
         {
-            var UserNameValidator = _UserContext.UserLoginInfo.FirstOrDefault(user => user.Username == check);
-            return UserNameValidator == null ? Ok(new { Unique = 1}) : Ok(new { Unique = 0 });
+            return Ok(_accountsAction.CheckEmailExists(email));
         }
     }
 }

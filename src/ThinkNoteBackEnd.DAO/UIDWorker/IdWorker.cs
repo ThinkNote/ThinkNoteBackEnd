@@ -37,6 +37,7 @@ namespace ThinkNoteBackEnd.DAO.Helper
         {
             SetIdWorkerInfo(WorkerId, DataCenterId, Sequence);
         }
+
         public void SetIdWorkerInfo(long workerId, long datacenterId, long sequence = 0L) 
         {
             WorkerId = workerId;
