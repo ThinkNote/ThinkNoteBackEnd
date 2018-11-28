@@ -35,7 +35,7 @@ namespace ThinkNoteBackEnd.DAO.Actions.User
         }
         public bool CheckEmailExists(string CheckEmail)
         {
-            return userContext.UserLoginInfo.Select(x => x.Email == CheckEmail).Count() > 0;
+            return userContext.UserLoginInfo.Where(x => x.Email == CheckEmail).Count() > 0;
         }
     }
 }
