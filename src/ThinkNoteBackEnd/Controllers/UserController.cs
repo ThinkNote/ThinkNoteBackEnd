@@ -11,18 +11,19 @@ namespace ThinkNoteBackEnd.Controllers
         private readonly IAccountsAction _accountsAction;
         public UserController(IAccountsAction accountsAction)
         {
-            _accountsAction = accountsAction;  
+            _accountsAction = accountsAction;
         }
         [AllowAnonymous]
         [HttpPost("Login")]
         public ActionResult ValidateLogin([FromForm] string identifier, [FromForm] string password)
         {
-            return Ok(_accountsAction.ValidateLoginAccount(identifier,password));
+            return Ok(_accountsAction.ValidateLoginAccount(identifier, password));
         }
         [HttpGet("CheckEmail")]
         public ActionResult CheckUniqueEmail([FromQuery] string email)
         {
-            return Ok(_accountsAction.CheckEmailExists(email));
+            var c = _accountsAction.CheckEmailExists(email);
+            return Ok(new { unique = c });
         }
     }
 }
