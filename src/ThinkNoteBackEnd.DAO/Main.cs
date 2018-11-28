@@ -5,17 +5,16 @@ using System.Text;
 using ThinkNoteBackEnd.DAO.Helper;
 using ThinkNoteBackEnd.DAO.User;
 using System.Linq;
+using System.Data.Common;
+
 namespace ThinkNoteBackEnd.DAO
 {
     class Program
     {
         public static void Main(string[] args)
         {
-            using (var context = new UserContext())
-            {
-                var found = context.UserLoginInfo.First(x => x.Uid == 119588986812907520);
-                Console.WriteLine(found.Username);
-            }
+            var worker = new IdWorker(1,1);
+            Console.WriteLine(worker.NextId());
         }
     }
 }
