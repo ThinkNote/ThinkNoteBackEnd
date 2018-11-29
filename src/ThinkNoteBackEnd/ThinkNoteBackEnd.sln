@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThinkNoteBackEnd.MainTest",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThinkNoteBackEnd.DAO", "..\ThinkNoteBackEnd.DAO\ThinkNoteBackEnd.DAO.csproj", "{148ED719-2869-461C-BA46-0520FD6AD948}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThinkNoteBackEnd.Persistence", "..\ThinkNoteBackEnd.Persistence\ThinkNoteBackEnd.Persistence.csproj", "{DA8FFA42-C6D2-4089-AAB6-26A1FB654C64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{148ED719-2869-461C-BA46-0520FD6AD948}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{148ED719-2869-461C-BA46-0520FD6AD948}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{148ED719-2869-461C-BA46-0520FD6AD948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA8FFA42-C6D2-4089-AAB6-26A1FB654C64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA8FFA42-C6D2-4089-AAB6-26A1FB654C64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA8FFA42-C6D2-4089-AAB6-26A1FB654C64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA8FFA42-C6D2-4089-AAB6-26A1FB654C64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ThinkNoteBackEnd.DAO.Actions.User;
+using ThinkNoteBackEnd.Persistence.User;
 
 namespace ThinkNoteBackEnd.Controllers
 {
@@ -9,9 +10,11 @@ namespace ThinkNoteBackEnd.Controllers
     public class UserController : ControllerBase
     {
         private readonly IAccountsAction _accountsAction;
-        public UserController(IAccountsAction accountsAction)
+        private readonly PersistUserFileServices _persistUserFileServices;
+        public UserController(IAccountsAction accountsAction, PersistUserFileServices persistUserFileServices)
         {
             _accountsAction = accountsAction;
+            _persistUserFileServices = persistUserFileServices;
         }
         [AllowAnonymous]
         [HttpPost("Login")]
@@ -24,6 +27,11 @@ namespace ThinkNoteBackEnd.Controllers
         {
             var c = _accountsAction.CheckEmailExists(email);
             return Ok(new { unique = c });
+        }
+        [HttpGet("testPersistence")]
+        public ActionResult PersistTest([FromQuery] string Uid)
+        {
+            return Ok(_persistUserFileServices.persistUserSyncFile.SayFoo(Uid));
         }
     }
 }
