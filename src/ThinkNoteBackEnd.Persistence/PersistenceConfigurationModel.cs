@@ -8,4 +8,8 @@ namespace ThinkNoteBackEnd.Persistence.Config
         public string StaticPath { get; set; }
         public string RecognitionPath { get; set; }
     }
+    public interface IPersistence
+    {
+
+    }
 }

@@ -1,11 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.DependencyModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using ThinkNoteBackEnd.Persistence.Config;
 using ThinkNoteBackEnd.Persistence.User;
 
@@ -15,8 +12,22 @@ namespace ThinkNoteBackEnd.Persistence
     {
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services)
         {
-            services.AddScoped(prov => new PersistUserFileServices(prov.GetService<IOptions<PersistenceConfigurationModel>>()));
+            AppDomain.CurrentDomain.GetAssemblies()
+                        .SelectMany(assm => assm.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IPersistence))))
+                        .Where(x => x.IsClass)
+                        .ForEachService(x => services.AddScoped
+                                        (prov => Activator.CreateInstance(x, prov.GetService<IOptions<PersistenceConfigurationModel>>()) 
+                                        as PersistUserFileServices));
             return services;
+        }
+
+        public static IEnumerable<T> ForEachService<T>(this IEnumerable<T> serv,Action<T> action)
+        {
+            foreach (var item in serv)
+            {
+                action(item);
+            }
+            return serv;
         }
     }
 }
