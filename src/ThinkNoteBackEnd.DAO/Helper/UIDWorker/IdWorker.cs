@@ -7,6 +7,7 @@
  * per process
  */
 
+using Microsoft.Extensions.Options;
 using System;
 
 namespace ThinkNoteBackEnd.DAO.Helper
@@ -37,7 +38,10 @@ namespace ThinkNoteBackEnd.DAO.Helper
         {
             SetIdWorkerInfo(WorkerId, DataCenterId, Sequence);
         }
-
+        public IdWorker(IOptions<SnowflakeConfigurationModel> options)
+        {
+            SetIdWorkerInfo(options.Value.WorkerId, options.Value.DatacenterId);
+        }
         public void SetIdWorkerInfo(long workerId, long datacenterId, long sequence = 0L) 
         {
             WorkerId = workerId;

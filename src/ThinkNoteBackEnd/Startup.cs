@@ -27,13 +27,11 @@ namespace ThinkNoteBackEnd
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.Configure<PersistenceConfigurationModel>(Configuration.GetSection("StatiicFilePath"));
-            var workerId = Configuration["SnowflakeConfiguration:WorkerId"];
-            var datacenterId = Configuration["SnowflakeConfiguration:DatacenterId"];
-            services.AddDbContext<UserContext>(opt => opt.UseMySQL(Configuration.GetConnectionString("MySQLConnectionString")));
-            services.AddSingleton(new IdWorker(int.Parse(workerId), int.Parse(datacenterId)));
-            services.AddSingleton<IAccountsAction, AccountsAction>(factory => new AccountsAction(factory.CreateScope().ServiceProvider));
-            //Add persistence services.
-            services.AddPersistenceServices();
+            services.Configure<SnowflakeConfigurationModel>(Configuration.GetSection("SnowflakeConfiguration"));
+            services.AddDbContext<UserContext>(opt => opt.UseMySQL(Configuration.GetConnectionString("MySQLConnectionString")),ServiceLifetime.Singleton);
+            services.AddSingleton<IdWorker>();
+            services.AddPersistenceServices(typeof(IPersistenceService));
+            services.AddScoped<IAccountsServices, AccountsServices>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

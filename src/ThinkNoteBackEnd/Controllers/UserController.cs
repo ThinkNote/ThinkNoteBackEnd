@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using ThinkNoteBackEnd.Common;
 using ThinkNoteBackEnd.DAO.Actions.User;
 using ThinkNoteBackEnd.Persistence.User;
 
@@ -9,29 +11,24 @@ namespace ThinkNoteBackEnd.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IAccountsAction _accountsAction;
+        private readonly IAccountsServices _accountsServices;
         private readonly PersistUserFileServices _persistUserFileServices;
-        public UserController(IAccountsAction accountsAction, PersistUserFileServices persistUserFileServices)
+
+        public UserController(IAccountsServices accountsServices, PersistUserFileServices persistUserFileServices)
         {
-            _accountsAction = accountsAction;
+            _accountsServices = accountsServices;
             _persistUserFileServices = persistUserFileServices;
         }
         [AllowAnonymous]
         [HttpPost("Login")]
-        public ActionResult ValidateLogin([FromForm] string identifier, [FromForm] string password)
+        public ActionResult ValidateLogin([FromForm][Required,EmailAddress] string identifier, [FromForm][Required]  string password)
         {
-            return Ok(_accountsAction.ValidateLoginAccount(identifier, password));
+            return Ok(_accountsServices.ValidateLoginAccount(identifier, password));
         }
         [HttpGet("CheckEmail")]
-        public ActionResult CheckUniqueEmail([FromQuery] string email)
+        public ActionResult CheckUniqueEmail([FromQuery][Required,EmailAddress]  string email)
         {
-            var c = _accountsAction.CheckEmailExists(email);
-            return Ok(new { unique = c });
-        }
-        [HttpGet("testPersistence")]
-        public ActionResult PersistTest([FromQuery] string Uid)
-        {
-            return Ok(_persistUserFileServices.persistUserSyncFile.SayFoo(Uid));
+            return Ok(new { unique = _accountsServices.CheckEmailExists(email) });
         }
     }
 }

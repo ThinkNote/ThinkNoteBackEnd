@@ -1,11 +1,11 @@
 using System.IO;
 namespace ThinkNoteBackEnd.Persistence.User
 {
-    public interface IPersistUserNotes
+    public interface IPersistUserNotes:IPersistUserResources
     {
 
     }
-    public class PersistUserNote : IPersistUserNotes, IPersistUserResources
+    public class PersistUserNote : IPersistUserNotes
     {
         public readonly string UserNotePathTemplate;
         public PersistUserNote(string userNotePath)

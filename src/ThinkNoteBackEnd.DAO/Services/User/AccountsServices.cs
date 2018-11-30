@@ -6,19 +6,19 @@ using ThinkNoteBackEnd.DAO.User;
 
 namespace ThinkNoteBackEnd.DAO.Actions.User
 {
-    public interface IAccountsAction
+    public interface IAccountsServices
     {
         UserLoginStatus ValidateLoginAccount(string Identifier, string Password);
         bool CheckEmailExists(string CheckEmail);
     }
-    public class AccountsAction : IAccountsAction
+    public class AccountsServices : IAccountsServices
     {
         public readonly UserContext userContext;
         public readonly IdWorker idWorker;
-        public AccountsAction(IServiceProvider provider)
+        public AccountsServices(UserContext user,IdWorker id)
         {
-            userContext = provider.GetRequiredService<UserContext>();
-            idWorker = provider.GetService<IdWorker>();
+            userContext = user;
+            idWorker = id;
         }
         public UserLoginStatus ValidateLoginAccount(string Identifier, string Password)
         {

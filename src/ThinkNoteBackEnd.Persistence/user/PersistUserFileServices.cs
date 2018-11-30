@@ -11,7 +11,7 @@ namespace ThinkNoteBackEnd.Persistence.User
     {
         string ResolveUserPath(string Uid);
     }
-    public class PersistUserFileServices:IPersistence
+    public class PersistUserFileServices : IPersistenceService
     {
         public readonly IPersistUserFile persistUserSyncFile;
         public readonly IPersistUserNotes persistUserNote;

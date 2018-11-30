@@ -3,11 +3,11 @@ using System.IO;
 using ThinkNoteBackEnd.Persistence;
 namespace ThinkNoteBackEnd.Persistence.User
 {
-    public interface IPersistUserFile
+    public interface IPersistUserFile:IPersistUserResources
     {
         string SayFoo(string Uid);
     }
-    public class PersistUserSyncFile : IPersistUserFile,IPersistUserResources
+    public class PersistUserSyncFile : IPersistUserFile
     {
         public readonly string UserSyncPathTemplate;
         public PersistUserSyncFile(string userSyncPath)
@@ -18,10 +18,9 @@ namespace ThinkNoteBackEnd.Persistence.User
         {
             return Path.Combine(UserSyncPathTemplate, Uid);
         }
-
         public string SayFoo(string Uid)
         {
-            return UserSyncPathTemplate+"  "+Uid;
+            return ResolveUserPath(Uid);
         }
     }
 }

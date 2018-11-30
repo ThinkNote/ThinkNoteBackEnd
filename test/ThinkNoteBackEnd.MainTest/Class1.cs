@@ -21,7 +21,6 @@ namespace ThinkNoteBackEnd.MainTest
         public void Test_User_Controller()
         {
             //Mock test run env.
-            var FakeServiceCollection = new ServiceCollection();
             var optionsBuilder = new DbContextOptionsBuilder<UserContext>();
             optionsBuilder.EnableSensitiveDataLogging();
             optionsBuilder.UseInMemoryDatabase();
@@ -33,9 +32,7 @@ namespace ThinkNoteBackEnd.MainTest
             };
             FakeDbContext.AddRange(FakeData);
             FakeDbContext.SaveChanges();
-            FakeServiceCollection.AddSingleton(_ => FakeDbContext);
-            FakeServiceCollection.AddSingleton(new IdWorker(1, 1));
-            var accountActions = new AccountsAction(FakeServiceCollection.BuildServiceProvider());
+            var accountActions = new AccountsServices(FakeDbContext, new IdWorker(1, 1));
 
             //It should return login success
             var Result1 = accountActions.ValidateLoginAccount("fakestudent@scut.edu.cn", "12345678");
