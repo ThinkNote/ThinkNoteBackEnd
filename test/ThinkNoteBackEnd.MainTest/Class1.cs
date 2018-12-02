@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ThinkNoteBackEnd.DAO.User;
 using ThinkNoteBackEnd.Helper;
 using ThinkNoteBackEnd.Services.User;
 using Xunit;
 using Microsoft.Extensions.Options;
+using ThinkNoteBackEnd.DAO;
+
 namespace ThinkNoteBackEnd.MainTest
 {
     public class Class1
@@ -52,7 +53,27 @@ namespace ThinkNoteBackEnd.MainTest
             Assert.True(accountActions.CheckEmailExists("relaxStudent@sysu.edu.cn"));
             Assert.False(accountActions.CheckEmailExists("123456@scut.edu.cn"));
             Assert.False(accountActions.CheckEmailExists(""));
+
+
+            //Test register
+            var NormalRegister = new UserRegisterInfo{
+                Username = "SuxiShuaitong",
+                Password = "Suxishuaitong Password",
+                Email = "Suxishuaitong@qq.com"
+            };
+            var NormalResult = accountActions.RegisterAccount(NormalRegister);
+            Assert.IsType(typeof(UserLoginStatus),NormalResult);
+            Assert.True(NormalResult.Status == 0);
+
+            var DuplicatedResult = accountActions.RegisterAccount(NormalRegister);
+            Assert.IsType(typeof(UserLoginStatus),DuplicatedResult);
+            Assert.True(DuplicatedResult.Status == 3);
+
+            //Test Login with new account
+
+            var LoginResult = accountActions.ValidateLoginAccount(NormalRegister.Email,NormalRegister.Password);
+            Assert.IsType(typeof(UserLoginStatus),LoginResult);
+            Assert.True(LoginResult.Status == 0);
         }
-        
     }
 }

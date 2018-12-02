@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace ThinkNoteBackEnd.DAO
-{ 
+{
     public partial class NoteFileTracker
     {
         public int Id { get; set; }
@@ -11,7 +11,6 @@ namespace ThinkNoteBackEnd.DAO
         public string Guid { get; set; }
         public string FileName { get; set; }
         public int GenerateType { get; set; }
-
         // override object.Equals
         public override bool Equals(object obj)
         {
@@ -19,21 +18,15 @@ namespace ThinkNoteBackEnd.DAO
             {
                 return false;
             }
-            if(obj is NoteFileTracker)
+            if (obj is NoteFileTracker)
             {
                 var c = obj as NoteFileTracker;
-                if (Id == c.Id &&
-                    OwnerUid == c.OwnerUid &&
+                if (OwnerUid == c.OwnerUid &&
                     Visibility == c.Visibility &&
                     Guid == c.Guid &&
                     GenerateType == c.GenerateType) return true;
-                
             }
             return false;
-        }
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
         }
     }
 }

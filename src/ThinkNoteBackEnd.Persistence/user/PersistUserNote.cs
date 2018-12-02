@@ -36,7 +36,6 @@ namespace ThinkNoteBackEnd.Persistence.User
             var path = GetNotePath(NoteInfo);
             dbContext.NoteFileTracker.Update(NoteInfo);
             var DbResult = dbContext.SaveChangesAsync();
-
             foreach (var file in FList)
             {
                 using (var fs = new FileStream(path,FileMode.Create))
@@ -48,8 +47,13 @@ namespace ThinkNoteBackEnd.Persistence.User
         }
         public NoteProviderStatus ProvideUserNoteFile(NoteFileTracker NoteInfo)
         {
-            var QueryNoteTracker = dbContext.NoteFileTracker.SingleOrDefault(x => x.Guid == NoteInfo.Guid);
-            if(QueryNoteTracker == null) return new NoteProviderStatus { Status = 2 };//cannot find record in database note_file_tracker
+            var QueryNoteTracker = dbContext.NoteFileTracker.FirstOrDefault(x => x.Guid == NoteInfo.Guid 
+                                                                                && x.OwnerUid == NoteInfo.OwnerUid 
+                                                                                && x.Visibility==NoteInfo.Visibility);    
+            if(QueryNoteTracker == null) 
+            {
+                return new NoteProviderStatus { Status = 2 };
+            }//cannot find record in database note_file_tracker
             try
             {
                 var path = GetNotePath(NoteInfo);

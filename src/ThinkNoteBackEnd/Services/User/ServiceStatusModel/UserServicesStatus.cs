@@ -4,13 +4,18 @@ public class UserLoginStatus
     {
 
     }
-    public UserLoginStatus(int status,string message)
+    public UserLoginStatus(int status, string message)
     {
         Status = status;
         Message = message;
     }
-    public int Status { get; set; } 
+    public int Status { get; set; }
     public string Message { get; set; }
+}
+
+public class UserLoginStatusWithToken:UserLoginStatus
+{
+    public object Token { get; set; }
 }
 public static class UserLoginStatusMsg
 {
@@ -22,6 +27,15 @@ public static class UserLoginStatusMsg
     public const string USER_REGISTER_DB_UPD_CONCURRENCY = "User register failed. Db update error.";
     public const string USER_REGISTER_EMAIL_ADDR_DUPLICATE = "User register failed. Email address is duplicated.";
 }
+
+public static class UserProfileStatusMsg
+{
+    public const string USER_PROFILE_UPDATE_SUCCESSFUL = "User profile updated.";
+    public const string USER_PROFILE_DB_UPD_CONCURRENCY = "User register failed. Db update error.";
+    public const string USER_PROFILE_DB_UPD_ERROR = "User register failed. Db update error.";
+
+    public const string USER_PROFILE_NOT_FOUND = "Cannot find the specified user profile.";
+}
 //On Login
 //0 successful
 //1 wrong password
@@ -31,3 +45,9 @@ public static class UserLoginStatusMsg
 //0 successful
 //1 db update error
 //2 db update lock detected.
+
+//On Profile
+//0 successful
+//1 db update error
+//2 db update lock detected.
+//3 user profile not found.

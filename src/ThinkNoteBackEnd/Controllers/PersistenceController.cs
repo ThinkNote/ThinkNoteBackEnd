@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations;
 using ThinkNoteBackEnd.DAO;
 using ThinkNoteBackEnd.Persistence;
 using ThinkNoteBackEnd.Persistence.User;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ThinkNoteBackEnd.Controllers
 {
@@ -22,14 +24,14 @@ namespace ThinkNoteBackEnd.Controllers
         [Authorize]
         public ActionResult CheckNoteSyncInfo([FromForm][Required] NoteFileTracker NoteInfoFromClient)
         {
-            return Ok(_user.CheckNoteSyncStatus(NoteInfoFromClient));
+            return Ok(JsonConvert.SerializeObject(_user.CheckNoteSyncStatus(NoteInfoFromClient)));
         }
         [HttpPost("upload/note")]
         [Authorize]
         public ActionResult UploadNoteToServer([FromForm][Required] NoteFileTracker NoteInfo,[FromForm][Required]List<IFormFile> NoteFile)
         {
             int result = _user.persistUserNote.SaveUserNoteFileAsync(NoteInfo, NoteFile).Result;
-            return Ok(result);
+            return Ok(JsonConvert.SerializeObject(result));
         }
         [HttpPost("download/note")]
         [Authorize]
@@ -41,9 +43,9 @@ namespace ThinkNoteBackEnd.Controllers
                 case 0:
                     return File(QueryNoteFileStatus.Stream,"application/think-note",NoteInfo.FileName+_user.config.NoteFileExtension);
                 case 2:
-                    return NotFound(new {Status = QueryNoteFileStatus.Status,Message = NoteProviderStatusMsg.FILE_NOT_FOUND});
+                    return NotFound(JsonConvert.SerializeObject(new {Status = QueryNoteFileStatus.Status,Message = NoteProviderStatusMsg.FILE_NOT_FOUND}));
                 case 1:
-                    return BadRequest(new {Status = QueryNoteFileStatus.Status,Message = NoteProviderStatusMsg.FILE_IO_EXCEPTION});
+                    return BadRequest(JsonConvert.SerializeObject(new {Status = QueryNoteFileStatus.Status,Message = NoteProviderStatusMsg.FILE_IO_EXCEPTION}));
             }
             return NotFound();
         }
