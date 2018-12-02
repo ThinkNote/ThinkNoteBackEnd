@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ThinkNoteBackEnd.DAO.Helper
+namespace ThinkNoteBackEnd.Helper
 {
     public class SnowflakeConfigurationModel
     {

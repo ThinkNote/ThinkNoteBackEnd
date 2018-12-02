@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ThinkNoteBackEnd.DAO.User
+namespace ThinkNoteBackEnd.DAO
 {
     public partial class UserLoginInfo
     {
@@ -17,10 +17,5 @@ namespace ThinkNoteBackEnd.DAO.User
 
         public UserProfileInfo UserProfileInfo { get; set; }
         public ICollection<UserJoinGroups> UserJoinGroups { get; set; }
-    }
-    public class UserLoginStatus
-    {
-        public int Status { get; set; }
-        public string Message { get; set; }
     }
 }

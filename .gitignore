@@ -278,3 +278,5 @@ __pycache__/
 
 src/ThinkNoteBackEnd.User/bin
 src/ThinkNoteBackEnd.User/obj
+
+appsettings.json

@@ -7,6 +7,7 @@ namespace ThinkNoteBackEnd.Persistence.Config
         public string UserPath { get; set; }
         public string StaticPath { get; set; }
         public string RecognitionPath { get; set; }
+        public string NoteFileExtension { get; set; }
     }
     public interface IPersistenceService
     {

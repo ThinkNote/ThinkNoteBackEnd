@@ -11,13 +11,17 @@
     <Folder Include="static\" />
     <Folder Include="recognition\" />
     <Folder Include="blogging\" />
-    <Folder Include="user\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0-preview3-35497" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0-preview3-35497" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ThinkNoteBackEnd.DAO\ThinkNoteBackEnd.DAO.csproj" />
   </ItemGroup>
 
 </Project>

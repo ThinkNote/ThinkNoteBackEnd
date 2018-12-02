@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ThinkNoteBackEnd.DAO.User
+namespace ThinkNoteBackEnd.DAO
 {
     public partial class StaticResourceTracker
     {

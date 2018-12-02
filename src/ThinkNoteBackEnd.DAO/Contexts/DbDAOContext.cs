@@ -2,15 +2,15 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace ThinkNoteBackEnd.DAO.User
+namespace ThinkNoteBackEnd.DAO
 {
-    public partial class UserContext : DbContext
+    public partial class DbDAOContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        public UserContext()
+        public DbDAOContext()
         {
         }
 
-        public UserContext(DbContextOptions<UserContext> options)
+        public DbDAOContext(DbContextOptions<DbDAOContext> options)
             : base(options)
         {
         }

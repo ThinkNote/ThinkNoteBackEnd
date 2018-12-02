@@ -10,7 +10,7 @@
 using Microsoft.Extensions.Options;
 using System;
 
-namespace ThinkNoteBackEnd.DAO.Helper
+namespace ThinkNoteBackEnd.Helper
 {
     public class IdWorker
     {
