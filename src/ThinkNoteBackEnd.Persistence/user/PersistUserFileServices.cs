@@ -14,19 +14,16 @@ namespace ThinkNoteBackEnd.Persistence.User
     {
         public readonly IPersistUserFile persistUserSyncFile;
         public readonly IPersistUserNotes persistUserNote;
-        public readonly PersistenceConfigurationModel persistenceConfiguration;
+        public readonly PersistenceConfigurationModel config;
         public readonly DbDAOContext dbContext;
         public PersistUserFileServices(IOptions<PersistenceConfigurationModel> options,DbDAOContext DbContext)
         {
-            persistenceConfiguration = options.Value;
-            var CombineUserPath = Path.Combine(persistenceConfiguration.RootPath, persistenceConfiguration.UserPath);
-
-
-            persistUserNote = new PersistUserNote(CombineUserPath,persistenceConfiguration.NoteFileExtension,DbContext);
+            config = options.Value;
+            var CombineUserPath = Path.Combine(config.RootPath, config.UserPath);
+            persistUserNote = new PersistUserNote(CombineUserPath,config.NoteFileExtension,DbContext);
             persistUserSyncFile = new PersistUserSyncFile(CombineUserPath,DbContext);
             dbContext = DbContext;
         }
-
         public NoteStatus CheckNoteSyncStatus(NoteFileTracker note)
         {
             var NoteTracker = dbContext.NoteFileTracker.SingleOrDefault(x => x.Guid == note.Guid);

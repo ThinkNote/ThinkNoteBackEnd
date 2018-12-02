@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DAO\User\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

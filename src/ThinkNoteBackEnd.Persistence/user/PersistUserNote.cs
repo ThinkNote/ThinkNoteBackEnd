@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using ThinkNoteBackEnd.DAO;
+using System.Linq;
 
 namespace ThinkNoteBackEnd.Persistence.User
 {
     public interface IPersistUserNotes : IPersistUserResources
     {
         Task<int> SaveUserNoteFileAsync(NoteFileTracker NoteInfo, List<IFormFile> FList);
+        NoteProviderStatus ProvideUserNoteFile(NoteFileTracker NoteInfo);
     }
     public class PersistUserNote : IPersistUserNotes
     {
@@ -28,9 +30,10 @@ namespace ThinkNoteBackEnd.Persistence.User
             if (!file.Exists) file.Directory.CreateSubdirectory(Uid);
             return path;
         }
+        public string GetNotePath(NoteFileTracker NoteInfo) => Path.Combine(ResolveUserPath(NoteInfo.OwnerUid.ToString()), NoteInfo.Guid + NoteFileExtension);
         public async Task<int> SaveUserNoteFileAsync(NoteFileTracker NoteInfo, List<IFormFile> FList)
         {
-            var path = Path.Combine(ResolveUserPath(NoteInfo.OwnerUid.ToString()), NoteInfo.Guid + NoteFileExtension);
+            var path = GetNotePath(NoteInfo);
             dbContext.NoteFileTracker.Update(NoteInfo);
             var DbResult = dbContext.SaveChangesAsync();
 
@@ -42,6 +45,25 @@ namespace ThinkNoteBackEnd.Persistence.User
                 }
             }
             return await DbResult;
+        }
+        public NoteProviderStatus ProvideUserNoteFile(NoteFileTracker NoteInfo)
+        {
+            var QueryNoteTracker = dbContext.NoteFileTracker.SingleOrDefault(x => x.Guid == NoteInfo.Guid);
+            if(QueryNoteTracker == null) return new NoteProviderStatus { Status = 2 };//cannot find record in database note_file_tracker
+            try
+            {
+                var path = GetNotePath(NoteInfo);
+                var fs = new FileStream(path, FileMode.Open);
+                return new NoteProviderStatus { Stream = fs, Status = 0 };
+            }
+            catch (FileNotFoundException)
+            {
+                return new NoteProviderStatus { Status = 2 };
+            }
+            catch (IOException)
+            {
+                return new NoteProviderStatus { Status = 1 };
+            }
         }
     }
 }
