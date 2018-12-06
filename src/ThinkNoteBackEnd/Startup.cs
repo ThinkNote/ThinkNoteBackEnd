@@ -67,6 +67,7 @@ namespace ThinkNoteBackEnd
             services.AddSingleton<IdWorker>();
             services.AddPersistenceServices(typeof(IPersistenceService));
             services.AddScoped<IAccountsServices, AccountsServices>();
+            services.AddCors();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -79,18 +80,7 @@ namespace ThinkNoteBackEnd
             {
                 app.UseHsts();
             }
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                Path.Combine(Directory.GetCurrentDirectory(), "../..", Configuration["StaticFilePath:RootPath"])),
-                RequestPath = "/persistence"
-            });
-            app.UseDirectoryBrowser(new DirectoryBrowserOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                Path.Combine(Directory.GetCurrentDirectory(), "../..", Configuration["StaticFilePath:RootPath"])),
-                RequestPath = "/persistence"
-            });
+            app.UseCors(opt => opt.AllowAnyOrigin());
             app.UseAuthentication();
             app.UseMvc();
         }

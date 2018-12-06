@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using ThinkNoteBackEnd.DAO;
 using ThinkNoteBackEnd.Persistence.Config;
+using ThinkNoteBackEnd.Persistence.Model;
 
 namespace ThinkNoteBackEnd.Persistence.User
 {

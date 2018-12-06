@@ -4,10 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ThinkNoteBackEnd.DAO;
-using ThinkNoteBackEnd.Persistence;
 using ThinkNoteBackEnd.Persistence.User;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using ThinkNoteBackEnd.Persistence.Model;
 
 namespace ThinkNoteBackEnd.Controllers
 {

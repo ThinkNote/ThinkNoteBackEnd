@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace ThinkNoteBackEnd.Persistence
+namespace ThinkNoteBackEnd.Persistence.Model
 {
     public class NoteStatus
     {
         public int Exist;
         public int SyncStatus;
     }
-
     public class NoteProviderStatus
     {
         public int Status;
         public FileStream Stream;
     }
-
     public class NoteProviderStatusMsg
     {
         public const string FILE_NOT_FOUND = "Cannot find the file specified.";

@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using ThinkNoteBackEnd.DAO;
 using System.Linq;
+using ThinkNoteBackEnd.Persistence.Model;
 
 namespace ThinkNoteBackEnd.Persistence.User
 {

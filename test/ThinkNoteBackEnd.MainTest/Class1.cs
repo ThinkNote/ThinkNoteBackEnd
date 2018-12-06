@@ -4,6 +4,8 @@ using ThinkNoteBackEnd.Services.User;
 using Xunit;
 using Microsoft.Extensions.Options;
 using ThinkNoteBackEnd.DAO;
+using ThinkNoteBackEnd.Services.User.Model;
+using ThinkNoteBackEnd.Model;
 
 namespace ThinkNoteBackEnd.MainTest
 {
@@ -62,11 +64,11 @@ namespace ThinkNoteBackEnd.MainTest
                 Email = "Suxishuaitong@qq.com"
             };
             var NormalResult = accountActions.RegisterAccount(NormalRegister);
-            Assert.IsType(typeof(UserLoginStatus),NormalResult);
+            Assert.IsType(typeof(BaseStatus),NormalResult);
             Assert.True(NormalResult.Status == 0);
 
             var DuplicatedResult = accountActions.RegisterAccount(NormalRegister);
-            Assert.IsType(typeof(UserLoginStatus),DuplicatedResult);
+            Assert.IsType(typeof(BaseStatus),DuplicatedResult);
             Assert.True(DuplicatedResult.Status == 3);
 
             //Test Login with new account

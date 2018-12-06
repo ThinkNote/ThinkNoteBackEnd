@@ -9,16 +9,18 @@ using System.Security.Claims;
 using System.Text;
 using ThinkNoteBackEnd.DAO;
 using ThinkNoteBackEnd.Helper;
+using ThinkNoteBackEnd.Model;
+using ThinkNoteBackEnd.Services.User.Model;
 
 namespace ThinkNoteBackEnd.Services.User
 {
     public interface IAccountsServices
     {
         UserLoginStatus ValidateLoginAccount(string Identifier, string Password);
-        UserLoginStatus RegisterAccount(UserRegisterInfo registerInfo);
+        BaseStatus RegisterAccount(UserRegisterInfo registerInfo);
         bool CheckEmailExists(string CheckEmail);
         object GetUserProfile(long Uid);
-        UserLoginStatus UpdateUserProfile(UserProfileInfo ProfileInfo);
+        BaseStatus UpdateUserProfile(UserProfileInfo ProfileInfo);
     }
     public class AccountsServices : IAccountsServices
     {
@@ -53,11 +55,11 @@ namespace ThinkNoteBackEnd.Services.User
         {
             return userContext.UserLoginInfo.Where(x => x.Email == CheckEmail).Count() > 0;
         }
-        public UserLoginStatus RegisterAccount(UserRegisterInfo registerInfo)
+        public BaseStatus RegisterAccount(UserRegisterInfo registerInfo)
         {
             var NewAccountUid = idWorker.NextId();
             var IsEmailAddrExist = CheckEmailExists(registerInfo.Email);
-            if (IsEmailAddrExist) return new UserLoginStatus(3, UserLoginStatusMsg.USER_REGISTER_EMAIL_ADDR_DUPLICATE);
+            if (IsEmailAddrExist) return new BaseStatus(3, UserLoginStatusMsg.USER_REGISTER_EMAIL_ADDR_DUPLICATE);
             try
             {
                 userContext.UserLoginInfo.Add(new UserLoginInfo
@@ -68,15 +70,15 @@ namespace ThinkNoteBackEnd.Services.User
                     Email = registerInfo.Email
                 });
                 userContext.SaveChanges();
-                return new UserLoginStatus(0, UserLoginStatusMsg.USER_REGISTER_SUCCESSFUL);
+                return new BaseStatus(0, UserLoginStatusMsg.USER_REGISTER_SUCCESSFUL);
             }
             catch (DbUpdateConcurrencyException)
             {
-                return new UserLoginStatus(2, UserLoginStatusMsg.USER_REGISTER_DB_UPD_CONCURRENCY);
+                return new BaseStatus(2, UserLoginStatusMsg.USER_REGISTER_DB_UPD_CONCURRENCY);
             }
             catch (DbUpdateException)
             {
-                return new UserLoginStatus(1, UserLoginStatusMsg.USER_REGISTER_DB_UPD_ERROR);
+                return new BaseStatus(1, UserLoginStatusMsg.USER_REGISTER_DB_UPD_ERROR);
             }
         }
         public object GenerateTokenObject(UserLoginInfo LoginInfo)
@@ -99,7 +101,7 @@ namespace ThinkNoteBackEnd.Services.User
             if (Profile == null) return new UserLoginStatus(3, UserProfileStatusMsg.USER_PROFILE_NOT_FOUND);
             return Profile;
         }
-        public UserLoginStatus UpdateUserProfile(UserProfileInfo ProfileInfo)
+        public BaseStatus UpdateUserProfile(UserProfileInfo ProfileInfo)
         {
             try
             {
@@ -108,17 +110,17 @@ namespace ThinkNoteBackEnd.Services.User
                 {
                     Prof.DeepUpdateItem(ProfileInfo);
                     userContext.SaveChanges();
-                    return new UserLoginStatus(0, UserProfileStatusMsg.USER_PROFILE_UPDATE_SUCCESSFUL);
+                    return new BaseStatus(0, UserProfileStatusMsg.USER_PROFILE_UPDATE_SUCCESSFUL);
                 }
-                return new UserLoginStatus(3, UserProfileStatusMsg.USER_PROFILE_NOT_FOUND);
+                return new BaseStatus(3, UserProfileStatusMsg.USER_PROFILE_NOT_FOUND);
             }
             catch (DbUpdateConcurrencyException)
             {
-                return new UserLoginStatus(2, UserProfileStatusMsg.USER_PROFILE_DB_UPD_CONCURRENCY);
+                return new BaseStatus(2, UserProfileStatusMsg.USER_PROFILE_DB_UPD_CONCURRENCY);
             }
             catch (DbUpdateException)
             {
-                return new UserLoginStatus(1, UserProfileStatusMsg.USER_PROFILE_DB_UPD_ERROR);
+                return new BaseStatus(1, UserProfileStatusMsg.USER_PROFILE_DB_UPD_ERROR);
             }
         }
     }
