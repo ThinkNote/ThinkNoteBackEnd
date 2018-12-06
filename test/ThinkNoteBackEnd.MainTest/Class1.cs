@@ -47,9 +47,9 @@ namespace ThinkNoteBackEnd.MainTest
             Assert.True(Result5.Status == 1, "Status != 1 when pass correct email but password is wrong");
             //It should return account not exist.
             var Result3 = accountActions.ValidateLoginAccount("student@scut.edu.cn", "1234567") as UserLoginStatus;
-            Assert.True(Result3.Status == 2, "Status != 2 when account is not exist.");
+            Assert.True(Result3.Status == 1, "Status != 2 when account is not exist.");
             var Result4 = accountActions.ValidateLoginAccount("", "") as UserLoginStatus;
-            Assert.True(Result4.Status == 2, "Status != 2 when account is not exist.") ;
+            Assert.True(Result4.Status == 1, "Status != 2 when account is not exist.") ;
             //It should report email address exists.
             Assert.True(accountActions.CheckEmailExists("fakestudent@scut.edu.cn"));
             Assert.True(accountActions.CheckEmailExists("relaxStudent@sysu.edu.cn"));
