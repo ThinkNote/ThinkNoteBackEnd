@@ -19,8 +19,7 @@ namespace ThinkNoteBackEnd.Services.User.Model
     public static class UserLoginStatusMsg
     {
         public const string USER_LOGIN_SUCCESSFUL = "User login successful";
-        public const string USER_LOGIN_WRONG_PASSWD = "User login failed. Wrong password.";
-        public const string USER_LOGIN_ACCOUNT_NOT_EXIST = "User login failed. Account not exists.";
+        public const string USER_LOGIN_FAILED= "User login failed. Email address or password wrong.";
         public const string USER_REGISTER_SUCCESSFUL = "User register successful.";
         public const string USER_REGISTER_DB_UPD_ERROR = "User register failed. Db update error.";
         public const string USER_REGISTER_DB_UPD_CONCURRENCY = "User register failed. Db update error.";
@@ -38,8 +37,7 @@ namespace ThinkNoteBackEnd.Services.User.Model
 }
 //On Login
 //0 successful
-//1 wrong password
-//2 account not exists.
+//1 用户名密码错误，不暴露具体原因，增加安全性
 
 //On Register
 //0 successful

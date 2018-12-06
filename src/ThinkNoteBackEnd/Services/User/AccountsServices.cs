@@ -35,21 +35,12 @@ namespace ThinkNoteBackEnd.Services.User
         }
         public UserLoginStatus ValidateLoginAccount(string Identifier, string Password)
         {
-            var loginvalidator = userContext.UserLoginInfo.FirstOrDefault(user => user.Email == Identifier);
+            var loginvalidator = userContext.UserLoginInfo.FirstOrDefault(user => user.Email == Identifier && user.Password == Password);
             if (loginvalidator != null)
             {
-                if (Password == loginvalidator.Password)
-                {
-                    if (_JwtInfo != null)
-                    {
-                        var AccessTokenObject = GenerateTokenObject(loginvalidator);
-                        return new UserLoginStatusWithToken { Message = UserLoginStatusMsg.USER_LOGIN_SUCCESSFUL, Status = 0, Token = AccessTokenObject };
-                    }
-                    return new UserLoginStatus { Message = UserLoginStatusMsg.USER_LOGIN_SUCCESSFUL, Status = 0 };
-                }
-                return new UserLoginStatus { Message = UserLoginStatusMsg.USER_LOGIN_WRONG_PASSWD, Status = 1 };
+                return new UserLoginStatus { Message = UserLoginStatusMsg.USER_LOGIN_SUCCESSFUL, Status = 0 };
             }
-            return new UserLoginStatus { Message = UserLoginStatusMsg.USER_LOGIN_ACCOUNT_NOT_EXIST, Status = 2 };
+            return new UserLoginStatus { Message = UserLoginStatusMsg.USER_LOGIN_FAILED, Status = 1 };
         }
         public bool CheckEmailExists(string CheckEmail)
         {
